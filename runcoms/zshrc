@@ -1,13 +1,36 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+# Needed on some systems
+export LANG=en_US.UTF-8 
+
+# Adding extra stuff to path
+export PATH=$HOME/.bin:$HOME/bin:/usr/local/bin:$PATH
+
+# nvm
+export NVM_DIR=~/.nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+# Aliases
+alias t="tmux"
+alias pg="postgres -D /usr/local/var/postgres"
+
+alias zconf="vim ~/etc/zshrc"
+alias reload="source ~/etc/zshrc"
+alias vimconf="vim ~/etc/vim/vimrc"
+
+alias enc='openssl enc -aes-256-cbc -in "$@"'
+alias dec='openssl enc -d -aes-256-cbc -in "$@"'
+
+# Common typos
+alias gist="git st ."
+alias noprompt="export PS1='$ ' && clear"
+
+# vim <3
+export EDITOR="vim"
+export DISABLE_AUTO_TITLE=true
+
+# z - jump around
+. $HOME/etc/z/z.sh
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
-
-# Customize to your needs...
