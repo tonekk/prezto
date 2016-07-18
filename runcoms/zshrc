@@ -12,8 +12,9 @@ export NVM_DIR=~/.nvm
 alias t="tmux"
 alias pg="postgres -D /usr/local/var/postgres"
 
-alias zconf="vim ~/etc/zshrc"
-alias reload="source ~/etc/zshrc"
+alias dotfiles="cd ~/etc && ls"
+alias zconf="vim ~/etc/zprezto/zshrc"
+alias reload="source ~/.zshrc"
 alias vimconf="vim ~/etc/vim/vimrc"
 
 alias enc='openssl enc -aes-256-cbc -in "$@"'
@@ -25,12 +26,19 @@ alias noprompt="export PS1='$ ' && clear"
 
 # vim <3
 export EDITOR="vim"
-export DISABLE_AUTO_TITLE=true
 
 # z - jump around
 . $HOME/etc/z/z.sh
 
-# Source Prezto.
+# Enable chruby
+CHRUBY_FILE=/usr/local/opt/chruby/share/chruby/chruby.sh
+CHRUBY_AUTO_FILE=/usr/local/opt/chruby/share/chruby/auto.sh
+if [ -f $CHRUBY_FILE ]; then
+  source $CHRUBY_FILE && source $CHRUBY_AUTO_FILE && \
+  chruby $(chruby | tail -n 1 | awk '{print $NF}')
+fi
+
+# Enable Prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
