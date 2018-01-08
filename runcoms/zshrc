@@ -3,6 +3,7 @@ export LANG=en_US.UTF-8
 
 # Adding extra stuff to path
 export PATH=$HOME/.bin:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:/usr/local/Cellar/qt/4.8.7_2/bin
 
 # nvm
 export NVM_DIR=~/.nvm
@@ -10,10 +11,10 @@ export NVM_DIR=~/.nvm
 
 # Aliases
 alias t="tmux"
-alias pg="postgres -D /usr/local/var/postgres"
+alias dc="docker-compose"
 
 alias dotfiles="cd ~/etc && ls"
-alias zconf="vim ~/etc/zprezto/zshrc"
+alias zconf="vim ~/etc/zprezto/runcoms/zshrc"
 alias reload="source ~/.zshrc"
 alias vimconf="vim ~/etc/vim/vimrc"
 
@@ -26,6 +27,7 @@ alias noprompt="export PS1='$ ' && clear"
 
 # vim <3
 export EDITOR="vim"
+export VISUAL="vim"
 
 # z - jump around
 . $HOME/etc/z/z.sh
