@@ -3,11 +3,6 @@ export LANG=en_US.UTF-8
 
 # Adding extra stuff to path
 export PATH=$HOME/.bin:$HOME/bin:/usr/local/bin:$PATH
-export PATH=$PATH:/usr/local/Cellar/qt/4.8.7_2/bin
-
-# nvm
-export NVM_DIR=~/.nvm
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 # Aliases
 alias t="tmux"
@@ -23,7 +18,6 @@ alias dec='openssl enc -d -aes-256-cbc -in "$@"'
 
 # Common typos
 alias gist="git st ."
-alias noprompt="export PS1='$ ' && clear"
 
 # vim <3
 export EDITOR="vim"
@@ -32,15 +26,11 @@ export VISUAL="vim"
 # z - jump around
 . $HOME/etc/z/z.sh
 
-# Enable chruby
-CHRUBY_FILE=/usr/local/opt/chruby/share/chruby/chruby.sh
-CHRUBY_AUTO_FILE=/usr/local/opt/chruby/share/chruby/auto.sh
-if [ -f $CHRUBY_FILE ]; then
-  source $CHRUBY_FILE && source $CHRUBY_AUTO_FILE && \
-  chruby $(chruby | tail -n 1 | awk '{print $NF}')
-fi
-
 # Enable Prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
+
+# Use <C-j> instead of <C-c> to terminate apps
+# because I use the former to copy text ;)
+stty intr \^j
