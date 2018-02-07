@@ -54,9 +54,10 @@ if [[ $DEVELOPMENT_SERVER -eq 1 ]]; then
 
   export EC2_INSTANCE="i-0a933635c806fa66a"
   export EC2_INSTANCE_IP="18.196.217.18"
-  alias start_server="aws ec2 start-instances --instance-ids $EC2_INSTANCE"
-  alias stop_server="aws ec2 stop-instances --instance-ids $EC2_INSTANCE"
-  alias connect="ssh -i ~/dev/dev.pem tonekk@$EC2_INSTANCE_IP"
+
+  function start_server { aws ec2 start-instances --instance-ids $EC2_INSTANCE }
+  function stop_server { aws ec2 stop-instances --instance-ids $EC2_INSTANCE }
+  function connect { ssh -i ~/dev/dev.pem tonekk@$EC2_INSTANCE_IP }
 
   function w0rk {
 
