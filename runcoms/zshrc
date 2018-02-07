@@ -1,11 +1,19 @@
+# Figure out which OS we're running
+if [[ $(uname -s) -eq "Linux" ]]; then
+  export OS="Linux"
+else
+  export OS="MacOS"
+fi
+
+# Figure out whether we're on the dev server
 uname -a | grep w0rkb0x >/dev/null
-DEVELOPMENT_SERVER=$?
+export DEVELOPMENT_SERVER=$?
 
 # Needed on some systems
 export LANG=en_US.UTF-8
 
 # Adding extra stuff to path
-export PATH=$HOME/.bin:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.bin:$HOME/bin:/usr/local/bin:$PATH
 
 # Aliases
 alias t="tmux"
@@ -18,9 +26,6 @@ alias vimconf="vim ~/etc/vim/vimrc"
 
 alias enc='openssl enc -aes-256-cbc -in "$@"'
 alias dec='openssl enc -d -aes-256-cbc -in "$@"'
-
-# Common typos
-alias gist="git st ."
 
 # vim <3
 export EDITOR="vim"
@@ -35,14 +40,54 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Use <C-j> instead of <C-c> to terminate apps
-# because I use the former to copy text ;)
-stty intr \^j
+# because I use the former to copy text (on linux)
+test $OS = "Linux" && stty intr \^j
 
-# Instant tmux session creat0r
-if [[ -z ${TMUX+x} ]] && [[ $DEVELOPMENT_SERVER -eq 0 ]]; then
-  tmux attach -t seatris 2>/dev/null || \
-    tmux \
-      new-session -s seatris -c /home/tonekk/seatris-server 'docker-compose logs -f' \; \
-      split-window -h 'vim' \; \
-      resize-pane -L 15 \;
+
+############################
+# Development server setup #
+############################
+
+if [[ $DEVELOPMENT_SERVER -eq 1 ]]; then
+
+  # This stuff is only needed on my real machines
+
+  export EC2_INSTANCE="i-0a933635c806fa66a"
+  export EC2_INSTANCE_IP="18.196.217.18"
+  alias start_server="aws ec2 start-instances --instance-ids $EC2_INSTANCE"
+  alias stop_server="aws ec2 stop-instances --instance-ids $EC2_INSTANCE"
+  alias connect="ssh -i ~/dev/dev.pem tonekk@$EC2_INSTANCE_IP"
+
+  function w0rk {
+
+    start_server
+    echo ""
+    printf "Waiting for EC2 instance to be ready"
+
+    ((count = 1))
+    while [[ $count -ne 100 ]] ; do
+      printf '.'
+      ssh -o ConnectTimeout=3 -i ~/dev/dev.pem tonekk@$EC2_INSTANCE_IP 2>/dev/null
+      rc=$?
+      if [[ $rc -eq 0 ]] ; then
+        ((count = 99))
+      fi
+      ((count = count + 1))
+    done
+
+    echo ""
+    echo "Do not forget to call 'stop_server'."
+  }
+
+else
+
+  # Create tmux session on development server instantly
+  if [[ -z ${TMUX+x} ]]; then
+    tmux attach -t seatris 2>/dev/null || \
+      tmux \
+        new-session -s seatris -c /home/tonekk/seatris-server 'docker-compose logs -f' \; \
+        split-window -h 'vim' \; \
+        resize-pane -L 15 \;
+  fi
+
 fi
