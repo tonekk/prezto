@@ -1,12 +1,15 @@
+uname -a | grep w0rkb0x >/dev/null
+DEVELOPMENT_SERVER=$?
+
 # Needed on some systems
-export LANG=en_US.UTF-8 
+export LANG=en_US.UTF-8
 
 # Adding extra stuff to path
 export PATH=$HOME/.bin:$HOME/bin:/usr/local/bin:$PATH
 
 # Aliases
 alias t="tmux"
-alias dc="docker-compose"
+alias doc="docker-compose"
 
 alias dotfiles="cd ~/etc && ls"
 alias zconf="vim ~/etc/zprezto/runcoms/zshrc"
@@ -34,3 +37,12 @@ fi
 # Use <C-j> instead of <C-c> to terminate apps
 # because I use the former to copy text ;)
 stty intr \^j
+
+# Instant tmux session creat0r
+if [[ -z ${TMUX+x} ]] && [[ $DEVELOPMENT_SERVER ]]; then
+  tmux attach -t seatris 2>/dev/null || \
+    tmux \
+      new-session -s seatris -c /home/tonekk/seatris-server 'docker-compose logs -f' \; \
+      split-window -h 'vim' \; \
+      resize-pane -L 15 \;
+fi
