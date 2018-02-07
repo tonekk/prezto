@@ -39,7 +39,7 @@ fi
 stty intr \^j
 
 # Instant tmux session creat0r
-if [[ -z ${TMUX+x} ]] && [[ $DEVELOPMENT_SERVER ]]; then
+if [[ -z ${TMUX+x} ]] && [[ $DEVELOPMENT_SERVER -eq 0 ]]; then
   tmux attach -t seatris 2>/dev/null || \
     tmux \
       new-session -s seatris -c /home/tonekk/seatris-server 'docker-compose logs -f' \; \
