@@ -18,6 +18,7 @@ export PATH=$HOME/.local/bin:$HOME/.bin:$HOME/bin:/usr/local/bin:$PATH
 # Aliases
 alias t="tmux"
 alias doc="docker-compose"
+alias dcsh="docker-compose exec app bash"
 
 alias dotfiles="cd ~/etc && ls"
 alias zconf="vim ~/etc/zprezto/runcoms/zshrc"
@@ -38,10 +39,6 @@ export VISUAL="vim"
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
-
-# Use <C-j> instead of <C-c> to terminate apps
-# because I use the former to copy text (on linux)
-test $OS = "Linux" && stty intr \^j
 
 
 ############################
