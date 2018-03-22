@@ -62,11 +62,7 @@ zstyle ':prezto:module:history-substring-search' globbing-flags ''
 #
 
 # Make development server distinguishable from other machines
-if [[ $DEVELOPMENT_SERVER -eq 0 ]]; then
-  zstyle ':prezto:module:prompt' theme 'pure'
-else
-  zstyle ':prezto:module:prompt' theme 'agnoster'
-fi
+zstyle ':prezto:module:prompt' theme 'pure'
 
 #
 # Syntax Highlighting
