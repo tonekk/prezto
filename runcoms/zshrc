@@ -40,6 +40,6 @@ source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
 # Secret env variables
-if [[ -s "~/.env" ]]; then
-  source ~/.env
+if [[ -f "$HOME/.env" ]]; then
+  source $HOME/.env
 fi
