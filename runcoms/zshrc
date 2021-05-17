@@ -10,6 +10,7 @@ export LANG=en_US.UTF-8
 
 # Adding extra stuff to path
 export PATH=$HOME/.local/bin:$HOME/.bin:$HOME/bin:/usr/local/bin:$PATH
+export VIMRC=$HOME/etc/neovim/init.vim
 
 # Aliases
 alias t="tmux"
@@ -17,16 +18,16 @@ alias doc="docker-compose"
 alias dcsh="docker-compose exec api bash"
 
 alias dotfiles="cd ~/etc && ls"
-alias zconf="vim ~/etc/zprezto/runcoms/zshrc"
+alias zconf="nvim ~/etc/zprezto/runcoms/zshrc"
 alias reload="source ~/.zshrc"
-alias vimconf="vim ~/etc/vim/vimrc"
+alias vimconf="nvim ~/etc/neovim/init.vim"
 
 alias enc='openssl enc -aes-256-cbc -in "$@"'
 alias dec='openssl enc -d -aes-256-cbc -in "$@"'
 
-# vim <3
-export EDITOR="vim"
-export VISUAL="vim"
+# nvim <3
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 # z - jump around
 . $HOME/etc/z/z.sh
