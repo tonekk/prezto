@@ -20,7 +20,7 @@ alias dcsh="docker-compose exec api bash"
 alias dotfiles="cd ~/etc && ls"
 alias zconf="nvim ~/etc/zprezto/runcoms/zshrc"
 alias reload="source ~/.zshrc"
-alias vimconf="nvim ~/etc/neovim/init.vim"
+alias vimconf="nvim ~/etc/nvim/init.vim"
 
 alias enc='openssl enc -aes-256-cbc -in "$@"'
 alias dec='openssl enc -d -aes-256-cbc -in "$@"'
@@ -28,6 +28,7 @@ alias dec='openssl enc -d -aes-256-cbc -in "$@"'
 # nvim <3
 export EDITOR="nvim"
 export VISUAL="nvim"
+alias vim="nvim"
 
 # z - jump around
 . $HOME/etc/z/z.sh
