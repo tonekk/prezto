@@ -28,7 +28,7 @@ alias dec='openssl enc -d -aes-256-cbc -in "$@"'
 # nvim <3
 export EDITOR="nvim"
 export VISUAL="nvim"
-alias vim="nvim"
+export XDG_CONFIG_HOME="$HOME/etc"
 
 # z - jump around
 . $HOME/etc/z/z.sh
