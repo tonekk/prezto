@@ -99,7 +99,7 @@ zstyle ':prezto:module:history-substring-search' globbing-flags ''
 # Prompt
 #
 
-zstyle ':prezto:module:prompt' theme 'sorin'
+zstyle ':prezto:module:prompt' theme 'pure'
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
