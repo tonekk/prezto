@@ -24,6 +24,7 @@ alias vimconf="nvim ~/etc/nvim/init.vim"
 
 alias enc='openssl enc -aes-256-cbc -in "$@"'
 alias dec='openssl enc -d -aes-256-cbc -in "$@"'
+alias vim='nvim'
 
 # nvim <3
 export EDITOR="nvim"
@@ -44,6 +45,9 @@ fi
 if [[ -f "$HOME/.env" ]]; then
   source $HOME/.env
 fi
+
 export NVM_DIR="$HOME/etc/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+eval "$(rbenv init - zsh)"
