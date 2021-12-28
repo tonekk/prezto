@@ -25,6 +25,7 @@ alias vimconf="nvim ~/etc/nvim/init.vim"
 alias enc='openssl enc -aes-256-cbc -in "$@"'
 alias dec='openssl enc -d -aes-256-cbc -in "$@"'
 alias vim='nvim'
+alias be='bundle exec'
 
 # nvim <3
 export EDITOR="nvim"
