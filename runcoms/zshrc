@@ -10,7 +10,7 @@ export LANG=en_US.UTF-8
 
 # Adding extra stuff to path
 export PATH=$HOME/.local/bin:$HOME/.bin:$HOME/bin:/usr/local/bin:$PATH
-export VIMRC=$HOME/etc/neovim/init.vim
+export CHADRC=$HOME/etc/nvim/lua/custom/chadrc.lua
 
 # Aliases
 alias t="tmux"
@@ -64,3 +64,7 @@ export LC_TIME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
 eval "$(direnv hook zsh)"
+
+alias gtin="ruby -e 'require \"./lib/gtin\"; n=rand.to_s[-12..-1]; print n+GTIN.gen_checksum(n).to_s' | pbcopy"
+
+alias nvchad_conf="cd $HOME/etc/nvim/lua && nvim -c :NvimTreeToggle"
