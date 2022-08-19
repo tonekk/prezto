@@ -1,3 +1,7 @@
+#################
+# ENV variables #
+#################
+
 # Figure out which OS we're running
 if [[ $(uname -s) -eq "Linux" ]]; then
   export OS="Linux"
@@ -5,55 +9,7 @@ else
   export OS="MacOS"
 fi
 
-# Needed on some systems
-export LANG=en_US.UTF-8
-
-# Adding extra stuff to path
-export PATH=$HOME/.local/bin:$HOME/.bin:$HOME/bin:/usr/local/bin:$PATH
-export CHADRC=$HOME/etc/nvim/lua/custom/chadrc.lua
-
-# Aliases
-alias t="tmux"
-alias doc="docker-compose"
-alias dcsh="docker-compose exec api bash"
-
-alias dotfiles="cd ~/etc && ls"
-alias zconf="nvim ~/etc/zprezto/runcoms/zshrc"
-alias reload="source ~/.zshrc"
-alias vimconf="nvim ~/etc/nvim/init.vim"
-
-alias enc='openssl enc -aes-256-cbc -in "$@"'
-alias dec='openssl enc -d -aes-256-cbc -in "$@"'
-alias vim='nvim'
-alias be='bundle exec'
-alias ns='nvm use $(cat .nvmrc)'
-
-# nvim <3
-export EDITOR="nvim"
-export VISUAL="nvim"
-export XDG_CONFIG_HOME="$HOME/etc"
-
-export XDG_CONFIG_HOME="$HOME/etc"
-
-# z - jump around
-. $HOME/etc/z/z.sh
-
-# Enable Prezto
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
-# Secret env variables
-if [[ -f "$HOME/.env" ]]; then
-  source $HOME/.env
-fi
-
-export NVM_DIR="$HOME/etc/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-eval "$(rbenv init - zsh)"
-
+# set language
 export LANG="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
@@ -63,8 +19,67 @@ export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
+# Adding extra stuff to PATH
+export PATH=$HOME/.local/bin:$HOME/.bin:$HOME/bin:/usr/local/bin:$PATH
+export CHADRC=$HOME/etc/nvim/lua/custom/chadrc.lua
+
+# nvim <3
+export EDITOR="nvim"
+export VISUAL="nvim"
+export XDG_CONFIG_HOME="$HOME/etc"
+
+
+########################################
+# enable all kinds of shell extensions #
+########################################
+
+# enable z
+. $HOME/etc/z/z.sh
+
+# enable zprezto
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# enable starship
+eval "$(starship init zsh)"
+
+# enable nvm
+export NVM_DIR="$HOME/etc/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# enable rbenv
+eval "$(rbenv init - zsh)"
+
+# enable direnv
 eval "$(direnv hook zsh)"
+
+
+#########################
+# aliases and functions #
+#########################
+
+alias t="tmux"
+alias doc="docker-compose"
+alias dcsh="docker-compose exec api bash"
+
+alias dotfiles="cd ~/etc && ls"
+alias zconf="nvim ~/etc/zprezto/runcoms/zshrc"
+alias reload="source ~/.zshrc"
+
+alias enc='openssl enc -aes-256-cbc -in "$@"'
+alias dec='openssl enc -d -aes-256-cbc -in "$@"'
+alias vim='nvim'
+alias be='bundle exec'
+alias ns='nvm use $(cat .nvmrc)'
 
 alias gtin="ruby -e 'require \"./lib/gtin\"; n=rand.to_s[-12..-1]; print n+GTIN.gen_checksum(n).to_s' | pbcopy"
 
 alias nvchad_conf="cd $HOME/etc/nvim/lua && nvim -c :NvimTreeToggle"
+
+check_cert_expiration_date () {
+  openssl s_client -servername $1 -connect $1:443 | openssl x509 -noout -dates
+}
+
+alias flush_dns="sudo killall -HUP mDNSResponder"
