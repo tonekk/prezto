@@ -83,3 +83,4 @@ check_cert_expiration_date () {
 }
 
 alias flush_dns="sudo killall -HUP mDNSResponder"
+alias e="exa"
