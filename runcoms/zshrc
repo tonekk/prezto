@@ -55,6 +55,10 @@ eval "$(rbenv init - zsh)"
 # enable direnv
 eval "$(direnv hook zsh)"
 
+# disable alacritty bouncing
+# https://github.com/alacritty/alacritty/pull/4304
+printf "\e[?1042l"
+
 
 #########################
 # aliases and functions #
