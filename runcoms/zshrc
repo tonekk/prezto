@@ -28,6 +28,9 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export XDG_CONFIG_HOME="$HOME/etc"
 
+# enable elixir history
+export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"
+
 
 ########################################
 # enable all kinds of shell extensions #
@@ -44,13 +47,11 @@ fi
 # enable starship
 eval "$(starship init zsh)"
 
-# enable nvm
-export NVM_DIR="$HOME/etc/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# enable brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# enable rbenv
-eval "$(rbenv init - zsh)"
+# enable asdf
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # enable direnv
 eval "$(direnv hook zsh)"
@@ -66,7 +67,6 @@ printf "\e[?1042l"
 
 alias t="tmux"
 alias doc="docker-compose"
-alias dcsh="docker-compose exec api bash"
 
 alias dotfiles="cd ~/etc && ls"
 alias zconf="nvim ~/etc/zprezto/runcoms/zshrc"
@@ -78,8 +78,6 @@ alias vim='nvim'
 alias be='bundle exec'
 alias ns='nvm use $(cat .nvmrc)'
 
-alias gtin="ruby -e 'require \"./lib/gtin\"; n=rand.to_s[-12..-1]; print n+GTIN.gen_checksum(n).to_s' | pbcopy"
-
 alias nvchad_conf="cd $HOME/etc/nvim/lua && nvim -c :NvimTreeToggle"
 
 check_cert_expiration_date () {
@@ -87,4 +85,3 @@ check_cert_expiration_date () {
 }
 
 alias flush_dns="sudo killall -HUP mDNSResponder"
-alias e="exa"
