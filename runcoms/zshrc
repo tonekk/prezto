@@ -56,10 +56,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # enable direnv
 eval "$(direnv hook zsh)"
 
-# disable alacritty bouncing
-# https://github.com/alacritty/alacritty/pull/4304
-printf "\e[?1042l"
-
 
 #########################
 # aliases and functions #
@@ -85,3 +81,15 @@ check_cert_expiration_date () {
 }
 
 alias flush_dns="sudo killall -HUP mDNSResponder"
+
+# Git fixup tools
+alias fixup="git log --pretty=format:'%h %s' --no-merges main.. | fzf --reverse --preview 'git show {1}' | cut -c -7 | xargs -o git commit --fixup"
+finish_fixup () {
+  BRANCH=${1:-"main"}
+  git rebase -i --autosquash "$BRANCH"
+}
+finish_noninteractive () {
+  BRANCH=${1:-"main"}
+  git -c sequence.editor=: rebase -i --autosquash "$BRANCH"
+}
+
