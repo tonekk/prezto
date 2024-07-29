@@ -50,8 +50,8 @@ eval "$(starship init zsh)"
 # enable brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# enable asdf
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+# enable mise-en-place
+eval "$(/opt/homebrew/bin/mise activate zsh)"
 
 # enable direnv
 eval "$(direnv hook zsh)"
