@@ -29,7 +29,8 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
-  'history-substring-search'
+  'history-substring-search' \
+  'zsh-z'
 
 #
 # Autosuggestions

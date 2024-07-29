@@ -28,16 +28,10 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export XDG_CONFIG_HOME="$HOME/etc"
 
-# enable elixir history
-export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"
-
 
 ########################################
 # enable all kinds of shell extensions #
 ########################################
-
-# enable z
-. $HOME/etc/z/z.sh
 
 # enable zprezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -57,20 +51,12 @@ eval "$(/opt/homebrew/bin/mise activate zsh)"
 # aliases and functions #
 #########################
 
-alias t="tmux"
-alias doc="docker-compose"
-
-alias dotfiles="cd ~/etc && ls"
 alias zconf="nvim ~/etc/zprezto/runcoms/zshrc"
 alias reload="source ~/.zshrc"
 
 alias enc='openssl enc -aes-256-cbc -in "$@"'
 alias dec='openssl enc -d -aes-256-cbc -in "$@"'
 alias vim='nvim'
-alias be='bundle exec'
-alias ns='nvm use $(cat .nvmrc)'
-
-alias nvchad_conf="cd $HOME/etc/nvim/lua && nvim -c :NvimTreeToggle"
 
 check_cert_expiration_date () {
   openssl s_client -servername $1 -connect $1:443 | openssl x509 -noout -dates
