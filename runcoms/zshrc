@@ -45,7 +45,7 @@ eval "$(starship init zsh)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # enable mise-en-place
-eval "$(/opt/homebrew/bin/mise activate zsh)"
+eval "$(/opt/homebrew/bin/mise activate zsh --shims)"
 
 #########################
 # aliases and functions #
