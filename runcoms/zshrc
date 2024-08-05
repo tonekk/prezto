@@ -21,7 +21,8 @@ export LC_ALL="en_US.UTF-8"
 
 # Adding extra stuff to PATH
 export PATH=$HOME/.local/bin:$HOME/.bin:$HOME/bin:/usr/local/bin:$PATH
-export CHADRC=$HOME/etc/nvim/lua/custom/chadrc.lua
+export PATH="$HOME/.local/share/mise/shims:$PATH"
+
 
 # nvim <3
 export EDITOR="nvim"
@@ -44,8 +45,6 @@ eval "$(starship init zsh)"
 # enable brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# enable mise-en-place
-eval "$(/opt/homebrew/bin/mise activate zsh --shims)"
 
 #########################
 # aliases and functions #
