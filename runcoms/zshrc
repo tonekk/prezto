@@ -21,8 +21,6 @@ export LC_ALL="en_US.UTF-8"
 
 # Adding extra stuff to PATH
 export PATH=$HOME/.local/bin:$HOME/.bin:$HOME/bin:/usr/local/bin:$PATH
-export PATH="$HOME/.local/share/mise/shims:$PATH"
-
 
 # nvim <3
 export EDITOR="nvim"
@@ -44,6 +42,9 @@ eval "$(starship init zsh)"
 
 # enable brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# enable mise
+eval "$(/Users/finn/.local/bin/mise activate zsh)"
 
 
 #########################
