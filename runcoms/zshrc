@@ -53,6 +53,7 @@ eval "$(/Users/finn/.local/bin/mise activate zsh)"
 
 alias zconf="nvim ~/etc/zprezto/runcoms/zshrc"
 alias reload="source ~/.zshrc"
+alias gl="git log --stat --topo-order --patch"
 
 alias enc='openssl enc -aes-256-cbc -in "$@"'
 alias dec='openssl enc -d -aes-256-cbc -in "$@"'
